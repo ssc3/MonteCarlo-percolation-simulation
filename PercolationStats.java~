@@ -1,0 +1,102 @@
+public class PercolationStats {
+    private Percolation test_perc;
+    
+    
+    public static void unit_test_perc(Percolation test_perc) {
+    test_perc.pretty_print();
+        
+        if (!test_perc.isOpen(1, 2)) {
+            test_perc.open(1, 2);
+        }
+        test_perc.pretty_print();    
+        
+        if (!test_perc.isOpen(2, 2)) {
+            test_perc.open(2, 2);
+        }
+        test_perc.pretty_print(); 
+        
+        if (!test_perc.isOpen(3, 2)) {
+            test_perc.open(3, 2);
+        }
+        test_perc.pretty_print(); 
+        
+        if (!test_perc.isOpen(4, 2)) {
+            test_perc.open(4, 2);
+        }
+        test_perc.pretty_print(); 
+        
+        if (!test_perc.isOpen(5, 2)) {
+            test_perc.open(5, 2);
+        }
+        test_perc.pretty_print(); 
+        
+        if (test_perc.percolates())
+            System.out.println("Percolates");
+        else
+            System.out.println("Does not percolate");
+    }
+        
+    
+    
+    
+    public static void main(String args[]) {
+        System.out.println("Hello, World");
+        
+        int length = args.length;
+        if (length < 2) {
+            System.out.println("You need to enter two arguments.");
+            System.exit(0);
+        }
+
+        int N = Integer.parseInt(args[0]);
+        int T = Integer.parseInt(args[1]);
+            
+        Percolation test_perc = new Percolation(5);
+       // unit_test_perc(test_perc);
+        
+        
+        while (T > 0) {
+            Percolation sim_perc = new Percolation(N);
+            
+            while (sim_perc.percolates_status == 0)
+            {    
+               if (sim_perc.percolates()) {
+                   System.out.println("Sim percolates");
+                   sim_perc.percolates_status = 1;
+               }
+                sim_perc.pretty_print();
+            
+                int randi = StdRandom.uniform(N+1);
+                if (randi == 0) {
+                    continue;
+                }
+            
+                int randj = StdRandom.uniform(N+1);
+                if (randj == 0) {
+                    continue;
+                }
+            
+                System.out.print(randi); System.out.println(randj);
+            
+                if (!sim_perc.isOpen(randi, randj)) {
+                    sim_perc.open(randi, randj);
+                }  
+                else {
+                    continue;
+                }
+                
+            
+
+                
+
+                T--;
+            }
+        }
+        
+        
+        
+            
+                      
+    }
+}
+    
